@@ -131,14 +131,12 @@ src/
 - Hooks personalizados para lógica reutilizável
 - Context API para estado global
 - Componentes funcionais com hooks
-- Lazy loading de rotas (pode ser implementado)
 
 ### API Integration
 
 - Axios com interceptors
 - Tratamento centralizado de erros
 - Tipagem de requests e responses
-- Timeout configurável
 
 ## Instalação e Execução
 
@@ -153,7 +151,7 @@ src/
 1. **Clone o repositório**
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/Airton-Ribeiro/unimed-assessment-front.git
 cd projeto-unimed-front
 ```
 
@@ -180,7 +178,7 @@ VITE_API_TIMEOUT=30000
 npm run dev5173
 ```
 
-A aplicação estará disponível em `http://localhost:3000`
+A aplicação estará disponível em `http://localhost:5173`
 
 ## Executando os Testes
 
@@ -304,7 +302,6 @@ Modal para criação e edição de contatos:
 - Formatação automática de telefones
 - Verificação de celular duplicado
 - Feedback visual de erros
-  oficial da Unimed Recife
 - Links de navegação: Contatos, Favoritos, Inativos
 - Informações do usuário logado
 - Botão de logout
@@ -325,7 +322,7 @@ Componente wrapper que fornece estrutura comum:
 
 ## Responsividade
 
-O sistema é totalmente responsivo, adaptando-se a diferentes tamanhos de tela:
+O sistema é parcialmente responsivo, adaptando-se a diferentes tamanhos de tela:
 
 - **Mobile** (< 768px): 1 coluna de cards
 - **Tablet** (768px - 992px): 2 colunas de cards
@@ -342,46 +339,9 @@ O sistema é totalmente responsivo, adaptando-se a diferentes tamanhos de tela:
 - **useContatos**: Gerencia listagem e operações de contatos
 - **useState**: Estado local de componentes
 
-### Persistência
-
-data de cadastro)
-
-- [ ] Adicionar ordenação de contatos (A-Z, data)
-- [ ] Implementar export de contatos (CSV, PDF)
-- [ ] Adicionar modo escuro (dark mode)
-- [ ] Adicionar foto/avatar para contatos
-- [ ] Implementar histórico de alterações
-- [ ] Adicionar testes E2E com Playwright
-- [ ] Implementar PWA (Progressive Web App)
-- [ ] Adicionar internacionalização (i18n)
-- [ ] Implementar debounce na busca para otimização
-- [ ] Implementar export de contatos (CSV, PDF)
-- [ ] Adicionar modo escuro (dark mode)
-- [ ] Implementar lazy loading de imagens
-- [ ] Adicionar testes E2E com Playwright
-- [ ] Implementar PWA (Progressive Web App)
-- [ ] Adicionar internacionalização (i18n)
-
-## Contribuindo
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
-## Licença
-
-Este projeto está sob a licença MIT.
-
 ## Autor
 
 Desenvolvido como parte do desafio técnico Unimed.
-
-## Suporte
-
-Para dúvidas ou problemas, abra uma issue no repositório.
-
 ---
 
 **Nota**: Este é um projeto de demonstração. Em produção, implemente medidas adicionais de segurança e otimização.
