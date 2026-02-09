@@ -1,0 +1,64 @@
+.contato-card {
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.contato-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-favorito {
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.btn-favorito:hover {
+  color: #00a859;
+  background: rgba(0, 168, 89, 0.1);
+}
+
+.btn-favorito.favorito-ativo {
+  color: #00a859;
+}
+
+.btn-favorito.favorito-ativo svg {
+  fill: #00a859;
+}
+
+.contato-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-icon {
+  color: #00a859;
+  flex-shrink: 0;
+}
+
+.info-link {
+  color: #495057;
+  text-decoration: none;
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+
+.info-link:hover {
+  color: #0d6efd;
+  text-decoration: underline;
+}

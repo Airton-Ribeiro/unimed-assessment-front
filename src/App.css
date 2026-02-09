@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Cores customizadas Unimed */
+:root {
+  --unimed-green: #00a859;
+  --unimed-green-dark: #008a48;
+  --unimed-green-light: #00c868;
+}
+
+/* Sobrescreve cores primary do Bootstrap */
+.btn-primary,
+.bg-primary,
+.navbar.bg-primary {
+  background-color: var(--unimed-green) !important;
+  border-color: var(--unimed-green) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--unimed-green-dark) !important;
+  border-color: var(--unimed-green-dark) !important;
+}
+
+.btn-outline-primary {
+  color: var(--unimed-green) !important;
+  border-color: var(--unimed-green) !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: var(--unimed-green) !important;
+  border-color: var(--unimed-green) !important;
+  color: white !important;
+}
+
+.text-primary {
+  color: var(--unimed-green) !important;
+}
+
+.spinner-border.text-primary {
+  color: var(--unimed-green) !important;
+}
+
+.badge.bg-danger,
+.bg-danger {
+  background-color: var(--unimed-green) !important;
+  border-color: var(--unimed-green) !important;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+}
+
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Animações globais */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Estilos para cards */
+.card {
+  transition: all 0.3s ease;
+}
+
+/* Botões */
+.btn {
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Links */
+a {
+  transition: color 0.2s ease;
+}

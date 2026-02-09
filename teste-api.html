@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste API Unimed</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+      .section {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      input,
+      button {
+        padding: 10px;
+        margin: 5px 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .response {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: monospace;
+        font-size: 12px;
+      }
+      .success {
+        border-left: 4px solid #28a745;
+      }
+      .error {
+        border-left: 4px solid #dc3545;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🧪 Teste API Unimed - Autenticação</h1>
+
+      <div class="section">
+        <h2>1️⃣ Enviar Código</h2>
+        <input
+          type="email"
+          id="emailSend"
+          placeholder="seu@email.com"
+          value=""
+        />
+        <button onclick="enviarCodigo()">Enviar Código</button>
+        <div id="responseSend" class="response" style="display: none"></div>
+      </div>
+
+      <div class="section">
+        <h2>2️⃣ Verificar Código</h2>
+        <input
+          type="email"
+          id="emailVerify"
+          placeholder="seu@email.com"
+          value=""
+        />
+        <input type="text" id="code" placeholder="123456" maxlength="6" />
+        <button onclick="verificarCodigo()">Verificar Código</button>
+        <div id="responseVerify" class="response" style="display: none"></div>
+      </div>
+
+      <div class="section">
+        <h2>3️⃣ Testar Endpoint com Token</h2>
+        <button onclick="listarContatos()">Listar Contatos</button>
+        <div id="responseContatos" class="response" style="display: none"></div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = "http://localhost:3333";
+      let token = "";
+
+      async function enviarCodigo() {
+        const email = document.getElementById("emailSend").value;
+        const responseDiv = document.getElementById("responseSend");
+
+        try {
+          console.log("📤 Enviando requisição send-code:", { email });
+
+          const response = await fetch(`${API_URL}/api/auth/send-code`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          });
+
+          const data = await response.json();
+          console.log("📥 Resposta send-code:", data);
+
+          responseDiv.style.display = "block";
+          responseDiv.className =
+            "response " + (response.ok ? "success" : "error");
+          responseDiv.textContent = `Status: ${response.status}\n\n${JSON.stringify(data, null, 2)}`;
+
+          // Preenche o email no segundo campo
+          if (response.ok) {
+            document.getElementById("emailVerify").value = email;
+          }
+        } catch (error) {
+          console.error("❌ Erro:", error);
+          responseDiv.style.display = "block";
+          responseDiv.className = "response error";
+          responseDiv.textContent = `Erro: ${error.message}`;
+        }
+      }
+
+      async function verificarCodigo() {
+        const email = document.getElementById("emailVerify").value;
+        const code = document.getElementById("code").value;
+        const responseDiv = document.getElementById("responseVerify");
+
+        try {
+          console.log("📤 Enviando requisição verify-code:", {
+            email,
+            code,
+            codeLength: code.length,
+          });
+
+          const response = await fetch(`${API_URL}/api/auth/verify-code`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, code }),
+          });
+
+          const data = await response.json();
+          console.log("📥 Resposta verify-code:", data);
+
+          responseDiv.style.display = "block";
+          responseDiv.className =
+            "response " + (response.ok ? "success" : "error");
+          responseDiv.textContent = `Status: ${response.status}\n\n${JSON.stringify(data, null, 2)}`;
+
+          // Salva o token se sucesso
+          if (response.ok && data.data && data.data.token) {
+            token = data.data.token;
+            console.log("✅ Token salvo:", token);
+          }
+        } catch (error) {
+          console.error("❌ Erro:", error);
+          responseDiv.style.display = "block";
+          responseDiv.className = "response error";
+          responseDiv.textContent = `Erro: ${error.message}`;
+        }
+      }
+
+      async function listarContatos() {
+        const responseDiv = document.getElementById("responseContatos");
+
+        if (!token) {
+          alert("Faça login primeiro para obter o token!");
+          return;
+        }
+
+        try {
+          console.log(
+            "📤 Enviando requisição listar contatos com token:",
+            token.substring(0, 20) + "...",
+          );
+
+          const response = await fetch(`${API_URL}/api/contatos`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const data = await response.json();
+          console.log("📥 Resposta contatos:", data);
+
+          responseDiv.style.display = "block";
+          responseDiv.className =
+            "response " + (response.ok ? "success" : "error");
+          responseDiv.textContent = `Status: ${response.status}\n\n${JSON.stringify(data, null, 2)}`;
+        } catch (error) {
+          console.error("❌ Erro:", error);
+          responseDiv.style.display = "block";
+          responseDiv.className = "response error";
+          responseDiv.textContent = `Erro: ${error.message}`;
+        }
+      }
+    </script>
+  </body>
+</html>
