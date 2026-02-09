@@ -253,7 +253,6 @@ pi/auth/send-code` - Enviar código de verificação
 - `POST /contatos` - Criar novo contato
 - `PUT /contatos/:id` - Atualizar contato
 - `PATCH /contatos/:id/favorito` - Alternar favorito
-- `DELETE /contatos/:id` - Inativar contato
 
 ### Tratamento de Erros
 
